@@ -3,7 +3,6 @@ inoremap jj <Esc>
 imap <C-j> <Right><Plug>snipMateNextOrTrigger
 nmap <C-tab> :bnext<cr>
 nmap <C-S-tab> :bprevious<cr>
-nmap <leader>sc :SyntasticCheck<CR>
 nmap <leader>lc :lclose<CR>
 nmap <leader>noh :noh<CR>
 nmap <C-1> :w<cr>
@@ -324,6 +323,9 @@ augroup golangac
 	autocmd FileType go nnoremap <leader>gli :GoImplements<CR>
 	autocmd FileType go nnoremap <leader>gla :GoAlternate<CR>
 	autocmd FileType go set shiftwidth=4 tabstop=4
+
+	autocmd BufWritePost *.go :GoBuild
+
 	au FileType go nnoremap <leader>fff :GoFmt<CR>
 	let g:go_fmt_autosave = 1
 	let g:go_fmt_command = "goimports"
@@ -337,9 +339,6 @@ augroup golangac
 
 	let g:go_metalinter_enabled = ['vet', 'golint']
 	let g:go_auto_type_info = 1
-	" let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
-	" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-	" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 	let g:go_list_type = "quickfix"
 	set updatetime=100
 augroup END
@@ -372,7 +371,6 @@ Plugin 'https://github.com/tpope/vim-git.git'
 Plugin 'L9'
 Plugin 'https://github.com/ddollar/nerdcommenter.git'
 Plugin 'https://github.com/scrooloose/nerdtree.git'
-Plugin 'https://github.com/scrooloose/syntastic.git'
 Plugin 'w0rp/ale'
 Plugin 'https://github.com/ervandew/supertab.git'
 Plugin 'https://github.com/terryma/vim-multiple-cursors.git'

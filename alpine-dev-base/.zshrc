@@ -24,4 +24,6 @@ source ~/.zsh/boost.zsh
 
 DISABLE_AUTO_UPDATE="true"
 
+printf "\e[?1004l"
+
 cd ~/
