@@ -13,10 +13,10 @@ RUN apk --update add \
     curl \
     ncurses-terminfo \
     python \
-    python3
+    python3 \
 
 # Install vim build dependencies
-RUN apk add --update --virtual build-deps \
+	&& apk add --update --virtual build-deps \
     build-base \
     libx11-dev \
     libxpm-dev \
@@ -24,10 +24,10 @@ RUN apk add --update --virtual build-deps \
     make \
     ncurses-dev \
     python3-dev \
-    python-dev
+    python-dev \
 
 # Build Vim
-RUN  cd /tmp \
+	&& cd /tmp \
     && git clone https://github.com/vim/vim \
     && cd /tmp/vim \
     && ./configure \
@@ -47,19 +47,18 @@ RUN  cd /tmp \
     libsm \
     libx11 \
     libxt \
-    ncurses
-
+    ncurses \
 # Cleanup
-RUN apk del build-deps
-RUN apk add \
+	&& apk del build-deps \
+	&& apk add \
     libxt \
     libx11 \
-    libstdc++
-RUN rm -rf \
+    libstdc++ \
+	i&& rm -rf \
     /var/cache/* \
     /var/log/* \
-    /var/tmp/*
-RUN mkdir /var/cache/apk
+    /var/tmp/* \
+ 	&& mkdir /var/cache/apk
 
 USER $UNAME
 
