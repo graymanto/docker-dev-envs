@@ -4,6 +4,8 @@ MAINTAINER graymanto <graymant@outlook.com>
 
 USER root
 
+RUN mkdir /var/cache/apk
+
 # Install vim plugin build dependencies
 RUN apk add --update --virtual build-deps \
 	build-base \
@@ -19,7 +21,7 @@ COPY .vimrc /home/developer/
 
 # Install vundle
 RUN git clone https://github.com/VundleVim/Vundle.vim.git /home/developer/.vim/bundle/Vundle.vim \
-	&& vim +PluginInstall +qall \
+	&& vim +PluginInstall +qall
 
 # Build YouCompleteMe
 RUN cd $UHOME/.vim/bundle/YouCompleteMe \

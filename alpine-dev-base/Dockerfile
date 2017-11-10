@@ -42,8 +42,8 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh
 COPY dev.zsh-theme /home/developer/.oh-my-zsh/themes/
 
 # Install fzf
-RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-RUN ~/.fzf/install
+#RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#RUN ~/.fzf/install
 
 # Zsh config
 COPY .zsh /home/developer/.zsh

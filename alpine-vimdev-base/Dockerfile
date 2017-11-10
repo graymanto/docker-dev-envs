@@ -1,4 +1,4 @@
-FROM alpine-godev-base
+FROM alpine-zsh-base
 
 MAINTAINER graymanto <graymant@outlook.com>
 
@@ -13,10 +13,10 @@ RUN apk --update add \
     curl \
     ncurses-terminfo \
     python \
-    python3
+    python3 \
 
 # Install vim build dependencies
-RUN apk add --update --virtual build-deps \
+	&& apk add --update --virtual build-deps \
     build-base \
     libx11-dev \
     libxpm-dev \
@@ -25,14 +25,9 @@ RUN apk add --update --virtual build-deps \
     ncurses-dev \
     python3-dev \
     python-dev \
-    libice \
-    libsm \
-    libx11 \
-    libxt \
-    ncurses
 
 # Build Vim
-RUN cd /tmp \
+	&& cd /tmp \
     && git clone https://github.com/vim/vim \
     && cd /tmp/vim \
     && ./configure \
@@ -46,10 +41,20 @@ RUN cd /tmp \
     --with-python-config-dir=/usr/lib/python2.7/config \
     --with-python3-config-dir=/usr/lib/python3.5/config \
     && make install \
-
+    && apk del build-deps \
+    && apk add \
+    libice \
+    libsm \
+    libx11 \
+    libxt \
+    libstdc++ \
+    ncurses \
 # Cleanup
-RUN apk del build-deps \
-	&& rm -rf /var/cache/*  /var/log/* /var/tmp/*
+	&& rm -rf \
+    /var/cache/* \
+    /var/log/* \
+    /var/tmp/* \
+	&& mkdir /var/cache/apk
 
 USER $UNAME
 
