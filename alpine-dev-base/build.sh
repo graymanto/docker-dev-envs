@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --tag=alpine-zsh-base .
+docker build --squash --tag=alpine-zsh-base .

@@ -1,0 +1,16 @@
+*~
+.DS_Store
+*.swp
+tags
+GPATH
+GRTAGS
+GTAGS
+.direnv
+.idea
+.env
+.envrc
+.tern-project
+gtms*
+.ycm_extra_conf.py
+compile_commands.json
+.agignore

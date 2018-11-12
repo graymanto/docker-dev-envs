@@ -5,23 +5,23 @@ MAINTAINER graymanto <graymant@outlook.com>
 USER root
 
 # Install vim dependencies
-RUN apk --update add \
-    bash \
-    the_silver_searcher \
-    jq \
+RUN apk --no-cache --update add \
     ctags \
-    curl \
     ncurses-terminfo \
     python \
     python3 \
+    libice \
+    libsm \
+    libx11 \
+    libxt \
+    libstdc++ \
+    ncurses
 
 # Install vim build dependencies
-	&& apk add --update --virtual build-deps \
-    build-base \
+	&& apk add --no-cache --update --virtual build-deps \
     libx11-dev \
     libxpm-dev \
     libxt-dev \
-    make \
     ncurses-dev \
     python3-dev \
     python-dev \
@@ -41,15 +41,8 @@ RUN apk --update add \
     --with-python-config-dir=/usr/lib/python2.7/config \
     --with-python3-config-dir=/usr/lib/python3.5/config \
     && make install \
-    && apk del build-deps \
-    && apk add \
-    libice \
-    libsm \
-    libx11 \
-    libxt \
-    libstdc++ \
-    ncurses \
 # Cleanup
+    && apk del build-deps \
 	&& rm -rf \
     /var/cache/* \
     /var/log/* \

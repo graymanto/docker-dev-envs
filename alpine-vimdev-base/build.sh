@@ -1,2 +1,2 @@
 #! /bin/bash
-docker build --tag=alpine-vimdev-base .
+docker build --squash --tag=alpine-vimdev-base .

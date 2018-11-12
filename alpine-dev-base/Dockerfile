@@ -6,7 +6,10 @@ ENV TERM screen-256color
 ENV HOME /home/developer
 
 # Install base packages
-RUN apk add --update curl zsh git tmux bash
+RUN apk add --no-cache --update \
+	curl zsh git tmux bash build-base
+    the_silver_searcher \
+    jq \
 
 # Configure environment
 ENV UID="1000" \
@@ -42,8 +45,8 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh
 COPY dev.zsh-theme /home/developer/.oh-my-zsh/themes/
 
 # Install fzf
-#RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-#RUN ~/.fzf/install
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git $UHOME/.fzf \
+	&& $UHOME/.fzf/install --bin
 
 # Zsh config
 COPY .zsh /home/developer/.zsh
